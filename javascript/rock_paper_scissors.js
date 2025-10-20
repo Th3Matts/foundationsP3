@@ -1,3 +1,4 @@
+// create an array to represent the computer choices
 const choices = ["Rock", "Paper", "Scissors"];
 
 let humanChoice = 0,
@@ -5,20 +6,26 @@ let humanChoice = 0,
   humanScore = 0,
   computerScore = 0;
 
+// create a function to choose for the computer
 const getComputerChoice = () =>
   (computerChoice = choices[Math.floor(Math.random() * (3 - 0) + 0)]);
 
+// get the human choice
 function getHumanChoice() {
+  // ask the human what he would choose
   choice = prompt("Choose between: Rock, Paper or Scissors");
 
+  // turn the human choice into case sensitive
   return (humanChoice =
     choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase());
 }
 
+// play a round of Rock, Paper, Scissors
 function playRound() {
   getHumanChoice();
   getComputerChoice();
 
+  // decide who would win
   switch (true) {
     case humanChoice === computerChoice:
       console.log(
@@ -47,12 +54,14 @@ function playRound() {
   }
 }
 
+// create a function to repeat the game for five rounds.
 function playGame() {
   for (let i = 0; i < 5; i++) {
     console.log(`GAME: ${i + 1}`)
     playRound();
   }
 
+  // declare the winner!
   return console.log(
     humanScore > computerScore
       ? `HUMAN wins! Final score: ${humanScore}-${computerScore}!`
@@ -62,4 +71,5 @@ function playGame() {
   );
 }
 
+// play the game
 playGame();
