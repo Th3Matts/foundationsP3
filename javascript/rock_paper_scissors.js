@@ -1,3 +1,5 @@
+const buttonsWrapper = document.querySelector('.btn_wrapper')
+
 // create an array to represent the computer choices
 const choices = ["Rock", "Paper", "Scissors"];
 
@@ -76,4 +78,4 @@ function playGame() {
 }
 
 // play the game
-playGame();
+//playGame();
