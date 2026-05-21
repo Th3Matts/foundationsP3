@@ -27,8 +27,7 @@ function getHumanChoice() {
 }
 
 // play a round of Rock, Paper, Scissors
-function playRound() {
-  getHumanChoice();
+function playRound(humanChoice) {
   getComputerChoice();
 
   // decide who would win
@@ -77,5 +76,31 @@ function playGame() {
   );
 }
 
+const rockBtn = document.querySelector('.rockBtn')
+const paperBtn = document.querySelector('.paperBtn')
+const scissorsBtn = document.querySelector('.scissorsBtn')
+
+rockBtn.addEventListener(
+  'click', () => {
+    humanChoice = 'Rock'
+    playRound(humanChoice)
+  }
+)
+
+paperBtn.addEventListener(
+  'click', () => {
+    humanChoice = 'Paper'
+    playRound(humanChoice)
+  }
+)
+
+scissorsBtn.addEventListener(
+  'click', () => {
+    humanChoice = 'Scissors'
+    playRound(humanChoice)
+  }
+)
+
+const results = document.querySelector('.result')
 // play the game
 //playGame();
