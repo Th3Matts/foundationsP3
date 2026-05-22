@@ -8,21 +8,54 @@
       href="./assets/images/favicon.ico"
       type="image/x-icon"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&family=Bitcount+Single:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="./assets/style/styel.css" />
   </head>
   <body>
     <div class="container">
+      <div class="results-wrapper">
+        <div class="scoreboard">
+          <h1>Rock, Paper, Scissors</h1>
+          <div class="score">
+            <div class="humans">
+              <div class="human-score">0</div>
+              <div>Humans</div>
+            </div>
+            <div class="separator">X</div>
+            <div class="machines">
+              <div class="machines-score">0</div>
+              <div>Machines</div>
+            </div>
+          </div>
+        </div>
+        <div class="results">
+          <p>The Match Is about to start</p>
+        </div>
+      </div>
     </div>
     <div class="container">
-      <button class="rockBtn"> Rock <span>🪨</span></button>
-      <button class="paperBtn"> Paper <span>📄</span></button>
-      <button class="scissorsBtn"> Scissors <span>✂️</span></button>
+      <div class="button-wrapper">
+        <div>
+          <button class="rockBtn">Rock <span>🪨</span></button>
+          <button class="paperBtn">Paper <span>📄</span></button>
+          <button class="scissorsBtn">Scissors <span>✂️</span></button>
+        </div>
+      </div>
     </div>
     <script src="./javascript/rock_paper_scissors.js"></script>
 
-    <footer>
-      @themattsmatts
-    </footer>
+    <footer>@themattsmatts</footer>
   </body>
 </html>

@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
+  font-family: 'JetBrains Mono', monospace;
 }
 
 body{
@@ -10,18 +12,64 @@ body{
   grid-template-rows: 1fr 1fr;
 }
 
-.results{
-  text-align: center;
-}
-
-.container{
+.container,
+.button-wrapper div{
   margin: 1rem;
   padding: 1rem;
   
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+}
 
+
+.scoreboard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.results-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score{
+  width: 75%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.human-score,
+.separator,
+.machines-score{
+  font-family: "Bitcount Grid Single", system-ui;
+  font-size: 10rem;
+}
+
+.humans,
+.machines{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results{
+  width: 45rem;
+  margin-top: 3rem;
+
+  text-align: center;
+}
+
+.button-wrapper{
+  width: 100%;
+}
+
+.button-wrapper > button {
+  margin: auto;
 }
 
 button{
@@ -36,12 +84,16 @@ button{
 
   border: 3px solid black;
   border-radius: 3px;
-
  
   padding: 0.25em 0.5em;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
 
   touch-action: manipulation;
+  cursor: pointer;
+}
+
+button:disabled{
+  color: brown;
 }
 
 @media (min-width: 768px) {

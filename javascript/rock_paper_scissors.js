@@ -1,30 +1,22 @@
-const buttonsWrapper = document.querySelector('.btn_wrapper')
+const buttonsWrapper = document.querySelector(".button-wrapper");
+const results = document.querySelector(".results");
+
+//get the scores
+const humanScoreboard = document.querySelector(".human-score");
+const machinesScoreboard = document.querySelector(".machines-score");
 
 // create an array to represent the computer choices
 const choices = ["Rock", "Paper", "Scissors"];
 
 let humanChoice = "",
   computerChoice = "",
+  matchResult = "",
   humanScore = 0,
   computerScore = 0;
 
 // create a function to choose for the computer
 const getComputerChoice = () =>
   (computerChoice = choices[Math.floor(Math.random() * 3)]);
-
-// get the human choice
-function getHumanChoice() {
-  // ask the human what he would choose
-  let choice = prompt("Choose between: Rock, Paper or Scissors");
-  if (!choice) {
-    console.log(`Humans gave up, Machines win`);
-    throw new Error("Game Forfeited");
-  }
-
-  // turn the human choice into case sensitive
-  return (humanChoice =
-    choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase());
-}
 
 // play a round of Rock, Paper, Scissors
 function playRound(humanChoice) {
@@ -33,74 +25,85 @@ function playRound(humanChoice) {
   // decide who would win
   switch (true) {
     case humanChoice === computerChoice:
-      console.log(
-        `Wow, human choose ${humanChoice} and machines choose ${computerChoice} thats a draw`
-      );
-      console.log(
-        `The score is ${humanScore} for Humans and ${computerScore} for the Machines!`
-      );
+      matchResult = `Wow, human choose ${humanChoice} and machines choose ${computerChoice} thats a draw`;
+      results.textContent = matchResult;
+      humanScoreboard.textContent = humanScore;
+
+      machinesScoreboard.textContent = computerScore;
       break;
     case (humanChoice == "Rock" && computerChoice == "Scissors") ||
       (humanChoice == "Paper" && computerChoice == "Rock") ||
       (humanChoice == "Scissors" && computerChoice == "Paper"):
-      console.log(`Congrats, you win! ${humanChoice} beats ${computerChoice}`);
+      matchResult = `Congrats, you win! ${humanChoice} beats ${computerChoice}`;
+      results.textContent = matchResult;
       humanScore++;
-      console.log(
-        `The score is ${humanScore} for Humans and ${computerScore} for the Machines!`
-      );
+      humanScoreboard.textContent = humanScore;
+      machinesScoreboard.textContent = computerScore;
       break;
     default:
-      console.log(`Too bad, you lost! ${computerChoice} beats ${humanChoice}`);
+      matchResult = `Too bad, you lost! ${computerChoice} beats ${humanChoice}`;
+      results.textContent = matchResult;
       computerScore++;
-      console.log(
-        `The score is ${humanScore} for Humans and ${computerScore} for the Machines!`
-      );
+      humanScoreboard.textContent = humanScore;
+
+      machinesScoreboard.textContent = computerScore;
       break;
   }
+
+  if (humanScore === 5) {
+    results.textContent = `HUMAN wins! Final score: ${humanScore}-${computerScore}!`;
+    resetScoreboard();
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  } else if (computerScore === 5) {
+    results.textContent = `MACHINES win! Final score: ${computerScore}-${humanScore}!`;
+    resetScoreboard();
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+
+  function resetScoreboard() {
+    ((humanScore = 0), (computerScore = 0));
+
+    const replay = document.createElement("button");
+    replay.textContent = "Replay ↺";
+    buttonsWrapper.appendChild(replay);
+
+    replay.addEventListener("click", () => {
+      ((humanScore = 0), (computerScore = 0));
+            
+      humanScoreboard.textContent = 0;
+
+      machinesScoreboard.textContent = 0;
+      
+      rockBtn.disabled = false;
+      paperBtn.disabled = false;
+      scissorsBtn.disabled = false;
+
+      replay.remove();
+    });
+
+    return;
+  }
 }
 
-// create a function to repeat the game for five rounds.
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(`GAME: ${i + 1}`);
-    playRound();
-  }
+const rockBtn = document.querySelector(".rockBtn");
+const paperBtn = document.querySelector(".paperBtn");
+const scissorsBtn = document.querySelector(".scissorsBtn");
 
-  // declare the winner!
-  return console.log(
-    humanScore > computerScore
-      ? `HUMAN wins! Final score: ${humanScore}-${computerScore}!`
-      : humanScore < computerScore
-      ? `MACHINES win! Final score: ${computerScore}-${humanScore}!`
-      : `IT'S A DRAW! A tight game ending in ${humanScore}-${computerScore}`
-  );
-}
+rockBtn.addEventListener("click", () => {
+  humanChoice = "Rock";
+  playRound(humanChoice);
+});
 
-const rockBtn = document.querySelector('.rockBtn')
-const paperBtn = document.querySelector('.paperBtn')
-const scissorsBtn = document.querySelector('.scissorsBtn')
+paperBtn.addEventListener("click", () => {
+  humanChoice = "Paper";
+  playRound(humanChoice);
+});
 
-rockBtn.addEventListener(
-  'click', () => {
-    humanChoice = 'Rock'
-    playRound(humanChoice)
-  }
-)
-
-paperBtn.addEventListener(
-  'click', () => {
-    humanChoice = 'Paper'
-    playRound(humanChoice)
-  }
-)
-
-scissorsBtn.addEventListener(
-  'click', () => {
-    humanChoice = 'Scissors'
-    playRound(humanChoice)
-  }
-)
-
-const results = document.querySelector('.result')
-// play the game
-//playGame();
+scissorsBtn.addEventListener("click", () => {
+  humanChoice = "Scissors";
+  playRound(humanChoice);
+});
