@@ -8,74 +8,71 @@ const machinesScoreboard = document.querySelector(".machines-score");
 // create an array to represent the computer choices
 const choices = ["Rock", "Paper", "Scissors"];
 
-let humanChoice = "",
-  computerChoice = "",
+let computerChoice = "",
   matchResult = "",
   humanScore = 0,
   computerScore = 0;
 
 // create a function to choose for the computer
-const getComputerChoice = () =>
-  (computerChoice = choices[Math.floor(Math.random() * 3)]);
+const getComputerChoice = () => choices[Math.floor(Math.random() * 3)];
+
+
+function updateScoreboard() {
+  humanScoreboard.textContent = humanScore;
+  machinesScoreboard.textContent = computerScore;
+}
 
 // play a round of Rock, Paper, Scissors
-function playRound(humanChoice) {
-  getComputerChoice();
+function playRound(humanSelection) {
+  computerChoice = getComputerChoice();
 
   // decide who would win
   switch (true) {
-    case humanChoice === computerChoice:
-      matchResult = `Wow, human choose ${humanChoice} and machines choose ${computerChoice} thats a draw`;
+    case humanSelection === computerChoice:
+      matchResult = `Wow, human choose ${humanSelection} and machines choose ${computerChoice} thats a draw`;
       results.textContent = matchResult;
-      humanScoreboard.textContent = humanScore;
-
-      machinesScoreboard.textContent = computerScore;
       break;
-    case (humanChoice == "Rock" && computerChoice == "Scissors") ||
-      (humanChoice == "Paper" && computerChoice == "Rock") ||
-      (humanChoice == "Scissors" && computerChoice == "Paper"):
-      matchResult = `Congrats, you win! ${humanChoice} beats ${computerChoice}`;
+    case (humanSelection === "Rock" && computerChoice === "Scissors") ||
+      (humanSelection === "Paper" && computerChoice === "Rock") ||
+      (humanSelection === "Scissors" && computerChoice === "Paper"):
+      matchResult = `Congrats, you win! ${humanSelection} beats ${computerChoice}`;
       results.textContent = matchResult;
       humanScore++;
-      humanScoreboard.textContent = humanScore;
-      machinesScoreboard.textContent = computerScore;
+      updateScoreboard()
       break;
     default:
-      matchResult = `Too bad, you lost! ${computerChoice} beats ${humanChoice}`;
+      matchResult = `Too bad, you lost! ${computerChoice} beats ${humanSelection}`;
       results.textContent = matchResult;
       computerScore++;
-      humanScoreboard.textContent = humanScore;
-
-      machinesScoreboard.textContent = computerScore;
+      updateScoreboard()
       break;
   }
 
   if (humanScore === 5) {
     results.textContent = `HUMAN wins! Final score: ${humanScore}-${computerScore}!`;
-    resetScoreboard();
+    handleGameEnd();
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
   } else if (computerScore === 5) {
     results.textContent = `MACHINES win! Final score: ${computerScore}-${humanScore}!`;
-    resetScoreboard();
+    handleGameEnd();
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
   }
+}
 
-  function resetScoreboard() {
-    ((humanScore = 0), (computerScore = 0));
-
+function handleGameEnd() {
     const replay = document.createElement("button");
     replay.textContent = "Replay ↺";
     buttonsWrapper.appendChild(replay);
 
     replay.addEventListener("click", () => {
-      ((humanScore = 0), (computerScore = 0));
+      humanScore = 0;
+      computerScore = 0;
             
       humanScoreboard.textContent = 0;
-
       machinesScoreboard.textContent = 0;
       
       rockBtn.disabled = false;
@@ -84,9 +81,6 @@ function playRound(humanChoice) {
 
       replay.remove();
     });
-
-    return;
-  }
 }
 
 const rockBtn = document.querySelector(".rockBtn");
@@ -94,16 +88,13 @@ const paperBtn = document.querySelector(".paperBtn");
 const scissorsBtn = document.querySelector(".scissorsBtn");
 
 rockBtn.addEventListener("click", () => {
-  humanChoice = "Rock";
-  playRound(humanChoice);
+  playRound("Rock");
 });
 
 paperBtn.addEventListener("click", () => {
-  humanChoice = "Paper";
-  playRound(humanChoice);
+  playRound("Paper");
 });
 
 scissorsBtn.addEventListener("click", () => {
-  humanChoice = "Scissors";
-  playRound(humanChoice);
+  playRound("Scissors");
 });
