@@ -1,17 +1,22 @@
 const buttonsWrapper = document.querySelector(".button-wrapper");
 const results = document.querySelector(".results");
 
+//buttons
+const rockBtn = document.querySelector(".rockBtn");
+const paperBtn = document.querySelector(".paperBtn");
+const scissorsBtn = document.querySelector(".scissorsBtn");
+
 //get the scores
 const humanScoreboard = document.querySelector(".human-score");
 const machinesScoreboard = document.querySelector(".machines-score");
 
+
 // create an array to represent the computer choices
 const choices = ["Rock", "Paper", "Scissors"];
 
-let computerChoice = "",
-  matchResult = "",
-  humanScore = 0,
-  computerScore = 0;
+
+let humanScore = 0;
+let computerScore = 0;
 
 // create a function to choose for the computer
 const getComputerChoice = () => choices[Math.floor(Math.random() * 3)];
@@ -24,6 +29,9 @@ function updateScoreboard() {
 
 // play a round of Rock, Paper, Scissors
 function playRound(humanSelection) {
+  let computerChoice = "";
+  let matchResult = "";
+
   computerChoice = getComputerChoice();
 
   // decide who would win
@@ -71,9 +79,8 @@ function handleGameEnd() {
     replay.addEventListener("click", () => {
       humanScore = 0;
       computerScore = 0;
-            
-      humanScoreboard.textContent = 0;
-      machinesScoreboard.textContent = 0;
+      
+      updateScoreboard();
       
       rockBtn.disabled = false;
       paperBtn.disabled = false;
@@ -82,10 +89,6 @@ function handleGameEnd() {
       replay.remove();
     });
 }
-
-const rockBtn = document.querySelector(".rockBtn");
-const paperBtn = document.querySelector(".paperBtn");
-const scissorsBtn = document.querySelector(".scissorsBtn");
 
 rockBtn.addEventListener("click", () => {
   playRound("Rock");
